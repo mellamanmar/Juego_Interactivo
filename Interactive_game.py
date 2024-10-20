@@ -30,7 +30,7 @@ class Personaje ():
 ## Método para defnir el destino
     def change_destiny (self):
         print ("Escoge tu destino, Moria, Gondor, Isengard o Mordor")
-        self.destiny = self.destiny.replace(self.destiny, input())#.capitalize      
+        self.destiny = self.destiny.replace(self.destiny, input().upper())     
 
 ## Método para definir el desarrollo del viaje
     def travel (self):
@@ -39,7 +39,7 @@ class Personaje ():
             enemy_force = 60
             if self.kind == "ENANO":
                 self.starting_force = self.starting_force + 30
-            print ("Fuerza actual ", self.starting_force)
+                print ("Tu súper fuerza te da 30 puntos más de fuerza. \nFuerza actual ", self.starting_force)
             self.starting_force = self.starting_force - enemy_force
 
         elif self.destiny == "GONDOR":
@@ -47,7 +47,7 @@ class Personaje ():
             enemy_force = 40
             if self.kind == "HOBBIT":
                 self.starting_force = self.starting_force + 30
-            print ("Fuerza actual ", self.starting_force)
+                print ("Por ser sigiloso tienes 30 puntos más de fuerza. \nFuerza actual ", self.starting_force)
             self.starting_force = self.starting_force - enemy_force
 
         elif self.destiny == "ISENGARD":
@@ -55,7 +55,7 @@ class Personaje ():
             enemy_force = 100
             if self.kind == "ELFO":
                 self.starting_force = self.starting_force + 30
-            print ("Fuerza actual ", self.starting_force)
+                print ("La agilidad élfica te da 30 puntos más de fuerza. \nFuerza actual ", self.starting_force)
             self.starting_force = self.starting_force - enemy_force
 
         elif self.destiny == "MORDOR":
@@ -63,19 +63,19 @@ class Personaje ():
             enemy_force = 80
             if self.kind == "HUMANO":
                 self.starting_force = self.starting_force + 30
-                print ("Fuerza actual ", self.starting_force)
+                print ("Gracias a tu destreza con las armas tendrás 30 puntos más de fuerza. \nFuerza actual ", self.starting_force)
             self.starting_force = self.starting_force - enemy_force
         
         print (f"Después de pelear con {self.enemy} quedas con {self.starting_force} puntos de energía")
 
     ## Método para definir el reto para los personajes
     def challenge (self):
-        print ("Deberás escoger el número de uno de los retos propuestos y de acuerdo a tu fuerza pasarás o perderás el podio", 
-            "comenzarás con ", self.starting_force, " puntos de fuerza")
-        challenge = input ("Los retos son: \n1. Pasar por una escalera destruida. \n2. Cruzar un castillo en ruinas. \n3. Pasar por las minas de los orcos. \n4. Atravesar un campo de lava\n")
-        if self.starting_force < 60:
-            print ("Perdiste el podio")
+        if self.starting_force <= 60:
+            print ("No podrás pasar por las pruebas tu fuerza no cumple el mínimo")
         else:
+            print ("Deberás escoger el número de uno de los retos propuestos y de acuerdo a tu fuerza pasarás o perderás el podio", 
+            "comenzarás con ", self.starting_force, " puntos de fuerza")
+            challenge = input ("Los retos son: \n1. Pasar por una escalera destruida. \n2. Cruzar un castillo en ruinas. \n3. Pasar por las minas de los orcos. \n4. Atravesar un campo de lava\n")
             if challenge == "1":
                 self.starting_force = self.starting_force - 40
             elif challenge == "2":
@@ -84,7 +84,7 @@ class Personaje ():
                 self.starting_force = self.starting_force - 60
             elif challenge == "4":
                 self.starting_force = self.starting_force - 70
-        print(f"Has pasado el reto con éxito, quedas con {self.starting_force}")
+            print(f"Has pasado el reto con éxito, quedas con {self.starting_force}")
     
     ## Método para definir cómo comen
     def eat (self):
@@ -111,25 +111,25 @@ class Personaje ():
     ## Método para definir los premios
     def reward (self):
         if self.kind == "ELFO":
-            if self.starting_force >= 250:
+            if self.starting_force >= 230:
                 print("Ganaste el primer lugar con ", self.starting_force)
-            elif self.starting_force > 190 and self.starting_force < 250:
+            elif self.starting_force > 170 and self.starting_force < 230:
                 print("Ganaste el segundo lugar con ", self.starting_force)
             else:
                 print("Ganaste el tercer lugar con ", self.starting_force)
         
         if self.kind == "HUMANO":
-            if self.starting_force >= 200:
+            if self.starting_force >= 180:
                 print("Ganaste el primer lugar con ", self.starting_force)
-            elif self.starting_force > 160 and self.starting_force < 200:
+            elif self.starting_force > 130 and self.starting_force < 180:
                 print("Ganaste el segundo lugar con ", self.starting_force)
             else:
                 print("Ganaste el tercer lugar con ", self.starting_force)
         
         if self.kind == "ENANO":
-            if self.starting_force >= 150:
+            if self.starting_force >= 130:
                 print("Ganaste el primer lugar con ", self.starting_force)
-            elif self.starting_force > 80 and self.starting_force < 150:
+            elif self.starting_force > 80 and self.starting_force < 130:
                 print("Ganaste el segundo lugar con ", self.starting_force)
             else:
                 print("Ganaste el tercer lugar con ", self.starting_force)
@@ -137,14 +137,14 @@ class Personaje ():
         if self.kind == "HOBBIT":
             if self.starting_force >= 100:
                 print("Ganaste el primer lugar con ", self.starting_force)
-            elif self.starting_force > 80 and self.starting_force < 30:
+            elif self.starting_force > 80 and self.starting_force < 100:
                 print("Ganaste el segundo lugar con ", self.starting_force)
             else:
                 print("Ganaste el tercer lugar con ", self.starting_force)
 
 
 
-player1 = Personaje(input("Escribe el personaje que quieres ser: Elfo, Hobbit, Humano o Enano "))
+player1 = Personaje(input("Escribe el personaje que quieres ser: Elfo, Hobbit, Humano o Enano ").upper())
 player1.atributes()
 player1.change_destiny()
 player1.travel()
